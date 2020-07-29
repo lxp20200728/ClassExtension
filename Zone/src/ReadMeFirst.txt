@@ -1,0 +1,15 @@
+Zone package下为原版xml格式的输出代码（未含有Json格式）
+
+ClassExtends package下为类的继承下的代码，包括基类(以base开头）和子类（以xml与json开头）的代码文件
+
+两个package代码调用入口在于Zone.ReadZoneInfoFormTxt类内的main函数，在main函数内进行的一系列的调用，在main
+内直接调用相关类及其方法即可。
+
+根据xml和json输出格式的共性，将其提取出相应的五个基类：最内层的serverline类（行信息）、最内层的zoneline类（行信息）、内层的serverpart类（可含有多个serverline）、内层的zonepart类（可含有多个zoneline）、最外层的zoneinfo类（可含有多个serverpart类和zonepart类，该题中都取一个即可）。如需生成其他格式，可继承基础的base类
+进行编写。
+
+由于拓展部分添加数据库输入对于代码移植不太友好，移植后运行需要用户账号密码端口等验证信息，故只做了从
+txt文本读取zoneInfo，并输出对应读取耗时。
+
+
+如果运行时读取提示找不到文件路径，可能是导入路径出现问题（导入整个zone文件夹时定位到zone文件夹下路径没问题，导入zone下的src文件夹时会定位到src文件夹下），可修改Zone.ReadZoneInfoFormTxt下的静态变量解决该问题，实在无法解决可将对应路径替换成绝对路径。
